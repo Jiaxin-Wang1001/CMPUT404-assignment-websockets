@@ -123,8 +123,11 @@ function getPosition(e) {
 
 function addEntity(entity, data) {
     world[entity] = data;
-    drawNextFrame(); // (but should we?)
+    // drawNextFrame(); // (but should we?)
     //XXX: Send a XHTML Request that updates the entity you just modified!
+    msg = {};
+    msg[entity] = data
+    socket.send(JSON.stringify(msg));
 }
 var counter = 0;
 function addEntityWithoutName(data) {
@@ -245,7 +248,15 @@ mouse.mousedraggers.push(function(x,y,clicked,e) {
 
 
 function update() {
-    drawFrame();
+    renderFrame();
+}
+
+function getWorld(){
+    url = '/world'
+    req = new Request(url)
+    fetch(req)
+    .then(response => response.json())
+    .then(data => world = data);
 }
 
 
@@ -254,6 +265,7 @@ function wsSetup() {
     socket = new WebSocket(url);
     socket.onopen = function() {
         //XXX: TODO What are you going to do here?
+        getWorld();
     };
     socket.onerror = function(msg) {
         debug("WebSocket Error:" + msg.data);
@@ -261,7 +273,11 @@ function wsSetup() {
     socket.onmessage = function(msg) {  
         try {
             debug("WebSocket Recv:" + msg.data);
-            //XXX: TODO What are you going to do here?            
+            //XXX: TODO What are you going to do here?
+            data = JSON.parse(msg.data)
+            for (key in data){
+                world[key] = data[key] 
+            }            
         } catch (e) {
             alert("socket on message: " + e);
         }
@@ -269,6 +285,7 @@ function wsSetup() {
 }
 
 wsSetup();
+
 
 
 
