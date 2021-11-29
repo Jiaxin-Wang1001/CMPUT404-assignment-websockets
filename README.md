@@ -59,3 +59,8 @@ Contributors
 * Mark Galloway
 * Abram Hindle
 * Cole Mackenzie
+* Jiaxin Wang
+
+Consultation
+============
+* Senyu Li
