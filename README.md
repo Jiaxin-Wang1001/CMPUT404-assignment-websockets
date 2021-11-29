@@ -71,7 +71,7 @@ Abram Hindle
 
 Hazel Victoria Campbell
 
-https://github.com/uofa-cmput404/cmput404-slides/blob/master/examples/ObserverExampleAJAX/server.py
+https://github.com/uofa-cmput404/cmput404-slides/tree/master/examples/WebSocketsExamples
 
 Jiaxin Wang
 
