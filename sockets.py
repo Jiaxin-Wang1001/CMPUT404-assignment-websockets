@@ -147,7 +147,6 @@ def update(entity):
     #     myWorld.update(entity, key, value)
     # data = json.dumps(myWorld.space[entity])
     myWorld.set(entity, msg)
-    myWorld.notify_all(entity, msg)
     msg = json.dumps(myWorld.get(entity))
     return msg
     
